@@ -1,2 +1,2 @@
-# isotropy-koa
-Isotropy wrapper around co-busboy.
+# isotropy-busboy
+Isotropy wrapper around async-busboy.

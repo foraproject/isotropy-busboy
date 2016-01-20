@@ -1,8 +1,8 @@
 {
   "author": "Jeswin Kumar <jeswinpk@agilehead.com>",
   "name": "isotropy-body",
-  "version": "0.1.0",
-  "description": "Isotropy wrapper around co-busboy.",
+  "version": "0.1.1",
+  "description": "Isotropy wrapper around async-busboy.",
   "main": "dist/isotropy-busboy.js",
   "scripts": {
     "test": "mocha dist/test/test.js"
