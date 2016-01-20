@@ -6,7 +6,7 @@ import fs from 'fs';
 import formstream from 'formstream';
 import busboy from '../isotropy-busboy';
 
-describe('Async-busboy', () => {
+describe('isotropy-busboy', () => {
   it('should gather all fields and streams', async () => {
     const req = request();
     const parts = await busboy(req);
