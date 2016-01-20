@@ -1,7 +1,7 @@
 {
   "author": "Jeswin Kumar <jeswinpk@agilehead.com>",
-  "name": "isotropy-body",
-  "version": "0.1.1",
+  "name": "isotropy-busboy",
+  "version": "0.1.2",
   "description": "Isotropy wrapper around async-busboy.",
   "main": "dist/isotropy-busboy.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeswin/isotropy-body.git"
+    "url": "https://github.com/jeswin/isotropy-busboy.git"
   },
   "dependencies": {
     "async-busboy": "*"
@@ -26,6 +26,6 @@
     "should": "*"
   },
   "engines": { "node": ">= 0.11.9" },
-  "keywords": ["koa", "co-body", "isomorphic"],
+  "keywords": ["koa", "busboy", "isomorphic"],
   "license" : "MIT"
 }
