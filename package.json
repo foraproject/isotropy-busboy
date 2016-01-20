@@ -1,7 +1,7 @@
 {
   "author": "Jeswin Kumar <jeswinpk@agilehead.com>",
   "name": "isotropy-body",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Isotropy wrapper around co-busboy.",
   "main": "dist/isotropy-busboy.js",
   "scripts": {
