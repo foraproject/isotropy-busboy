@@ -1,11 +1,11 @@
 # isotropy-busboy
-Enables using busboy (multipart parser) with ES7 async/await.
-For more, see Busboyhttps://github.com/mscdex/busboy/blob/master/README.md
+Enables using busboy (multipart parser) with ES7 async/await. This is influenced by co-busboy, which uses co and generators.
+For more, see Busboy: https://github.com/mscdex/busboy/blob/master/README.md
 
 ## How To
 
 Multipart data can contain Fields and Files (called a 'Part').
-Files are a stream, which you can pipe to a destination.
+File data comes as a stream, which you can pipe to a destination.
 
 ```
 const busboy = require("isotropy-busboy");
@@ -16,15 +16,21 @@ while(part = await getPart()) {
   if (part.value) {
     fields++;
   } else {
+    //part.file is a stream
     part.file.resume();
     streams++;
   }
 }
-fields.should.equal(6);
-streams.should.equal(3);
 ```
 
 Every time you call getPart() as in the example above, you receive a new Part.
+```
+const getPart = busboy(httpRequest);
+const part = await getPart()
+const anotherPart = await getPart()
+console.log(part.fieldname)
+console.log(anotherPart.fieldname)
+```
 
 A Field Part has two properties:
 ```
