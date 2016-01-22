@@ -4,6 +4,11 @@ For more, see Busboy: https://github.com/mscdex/busboy/blob/master/README.md
 
 ## How To
 
+Install from npm
+```
+npm install isotropy-busboy
+```
+
 Multipart data can contain Fields and Files (called a 'Part').
 File data comes as a stream, which you can pipe to a destination.
 
