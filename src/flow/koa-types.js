@@ -1,4 +1,6 @@
 /* @flow */
+import type { IncomingMessage, ServerResponse } from "./http-types";
+
 export type KoaType = {
     use: (middleware: KoaMiddlewareType) => void;
     middleware: Array<KoaMiddlewareType>
@@ -15,8 +17,8 @@ export type KoaContextType = {
     body: string;
     request: Object,
     response: Object,
-    req: Object,
-    res: Object
+    req: IncomingMessage,
+    res: ServerResponse
 }
 
 export type KoaMiddlewareType = (context: KoaContextType, next: KoaNextType) => Promise

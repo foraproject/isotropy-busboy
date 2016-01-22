@@ -1,4 +1,4 @@
-declare module "async-busboy" {
+declare module "busboy" {
   declare type KoaContextType = {
     code: number;
     redirect: (url: string) => void;
