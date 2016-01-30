@@ -1,5 +1,4 @@
 /* @flow */
-import type { KoaContextType } from "./flow/koa-types";
 import type { IncomingMessage } from "./flow/http-types";
 import Busboy from 'busboy';
 
@@ -24,13 +23,10 @@ type OptionsType = {
   }
 }
 
-export default function (context: KoaContextType, opts: OptionsType = {}) : () => Promise<?PartType> {
+export default function (request: IncomingMessage, opts: OptionsType = {}) : () => Promise<?PartType> {
   let isAwaiting = false;
   let resolve, reject;
   let parts: Array<PartType> = [], errors: Array<Error> = [];
-
-  // koa special sauce
-  const request: IncomingMessage = context.req || context;
   const busboyOptions = Object.assign({}, opts);
   busboyOptions.headers = request.headers;
   const busboy = new Busboy(busboyOptions);

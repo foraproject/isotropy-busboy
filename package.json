@@ -1,7 +1,7 @@
 {
   "author": "Jeswin Kumar <jeswinpk@agilehead.com>",
   "name": "isotropy-busboy",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Wrapper around busboy that works with async/await.",
   "main": "dist/isotropy-busboy.js",
   "scripts": {
