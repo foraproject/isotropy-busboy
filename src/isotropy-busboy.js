@@ -6,6 +6,8 @@ type FilePartType = {
   fieldname: string;
   file: string;
   filename: string;
+  transferEncoding: string;
+  mimeType: string;
 }
 
 type FieldPartType = {
@@ -66,7 +68,9 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
     parts.push({
       fieldname,
       filename,
-      file
+      file,
+      transferEncoding,
+      mimeType
     });
     fulfill();
   }
