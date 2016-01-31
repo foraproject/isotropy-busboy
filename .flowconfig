@@ -13,3 +13,4 @@ interfaces/
 .*/node_modules/fbjs/.*
 .*/node_modules/koa/.*
 .*/node_modules/co-body/.*
+.*/node_modules/busboy/.*

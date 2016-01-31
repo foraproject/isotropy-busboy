@@ -1,22 +1,8 @@
 declare module "busboy" {
-  declare type KoaContextType = {
-    code: number;
-    redirect: (url: string) => void;
-    method: string;
-    path: string;
-    status: number;
-    body: string;
-    request: Object,
-    response: Object,
-    req: Object,
-    res: Object
+
+  declare class exports {
+    constructor(options: Object) : void;
+    on(event: string, handler: Function) : this;
+    removeAllListeners(event: string) : void;
   }
-
-  declare type FilePartType = {
-    fieldname: string;
-    file: string;
-    filename: string;
-  };
-
-  declare function exports(context: KoaContextType) : Promise<{ fields: { [key: string]: string }, files: Array<FilePartType> }>
 }

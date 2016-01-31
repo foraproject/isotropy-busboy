@@ -1,10 +1,12 @@
 /* @flow */
-import type { IncomingMessage } from "./flow/http-types";
 import Busboy from 'busboy';
+
+import type { IncomingMessage } from "./flow/http-types";
+import type { Stream } from "./flow/stream-types";
 
 export type FilePartType = {
   fieldname: string;
-  file: string;
+  file: Stream;
   filename: string;
   transferEncoding: string;
   mimeType: string;
@@ -26,11 +28,12 @@ export type OptionsType = {
 }
 
 export default function (request: IncomingMessage, opts: OptionsType = {}) : () => Promise<?PartType> {
-  let isAwaiting = false;
-  let ended = false;
-  let resolve, reject;
+  let isAwaiting: boolean = false;
+  let ended: boolean = false;
+  let resolve: Function, reject: Function;
   let parts: Array<PartType> = [], errors: Array<Error> = [];
-  const busboyOptions = Object.assign({}, opts);
+
+  const busboyOptions: Object = Object.assign({}, opts);
   busboyOptions.headers = request.headers;
   const busboy = new Busboy(busboyOptions);
 
@@ -56,7 +59,7 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
 
   request.pipe(busboy);
 
-  function onField(fieldname, value, fieldnameTruncated, valTruncated) {
+  function onField(fieldname: string, value: string, fieldnameTruncated: boolean, valTruncated: boolean) {
     parts.push({
       fieldname,
       value
@@ -64,7 +67,7 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
     fulfill();
   }
 
-  function onFile(fieldname, file, filename, transferEncoding, mimeType) {
+  function onFile(fieldname: string, file: Stream, filename: string, transferEncoding: string, mimeType: string) {
     parts.push({
       fieldname,
       filename,
@@ -81,7 +84,7 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
     cleanup()
   }
 
-  function onError(str) {
+  function onError(str: string) {
     const err = new Error(str);
     errors.push(err);
     fulfill();
