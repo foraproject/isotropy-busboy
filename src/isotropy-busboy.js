@@ -25,6 +25,7 @@ type OptionsType = {
 
 export default function (request: IncomingMessage, opts: OptionsType = {}) : () => Promise<?PartType> {
   let isAwaiting = false;
+  let ended = false;
   let resolve, reject;
   let parts: Array<PartType> = [], errors: Array<Error> = [];
   const busboyOptions = Object.assign({}, opts);
@@ -71,7 +72,8 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
   }
 
   function onEnd() {
-    resolve();
+    ended = true;
+    fulfill();
     cleanup()
   }
 
@@ -101,6 +103,8 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
       } else if (parts.length) {
         resolve(parts.shift());
         isAwaiting = false;
+      } else if (ended) {
+        resolve();
       }
     }
   }
