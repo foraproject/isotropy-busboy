@@ -2,7 +2,7 @@
 import type { IncomingMessage } from "./flow/http-types";
 import Busboy from 'busboy';
 
-type FilePartType = {
+export type FilePartType = {
   fieldname: string;
   file: string;
   filename: string;
@@ -10,14 +10,14 @@ type FilePartType = {
   mimeType: string;
 }
 
-type FieldPartType = {
+export type FieldPartType = {
   fieldname: string;
   value: string;
 }
 
-type PartType = FilePartType | FieldPartType;
+export type PartType = FilePartType | FieldPartType;
 
-type OptionsType = {
+export type OptionsType = {
   limits?: {
     files?: number,
     parts?: number,
