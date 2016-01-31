@@ -5,6 +5,7 @@ import type { IncomingMessage } from "./flow/http-types";
 import type { Stream } from "./flow/stream-types";
 
 export type FilePartType = {
+  type: 'file';
   fieldname: string;
   file: Stream;
   filename: string;
@@ -13,6 +14,7 @@ export type FilePartType = {
 }
 
 export type FieldPartType = {
+  type: 'field';
   fieldname: string;
   value: string;
 }
@@ -61,6 +63,7 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
 
   function onField(fieldname: string, value: string, fieldnameTruncated: boolean, valTruncated: boolean) {
     parts.push({
+      type: 'field',
       fieldname,
       value
     });
@@ -69,6 +72,7 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
 
   function onFile(fieldname: string, file: Stream, filename: string, transferEncoding: string, mimeType: string) {
     parts.push({
+      type: 'file',
       fieldname,
       filename,
       file,
