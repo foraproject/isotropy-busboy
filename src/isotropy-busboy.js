@@ -9,6 +9,8 @@ export type FormDataEntryType = {
   value?: string;
   filename?: string;
   file?: Object;
+  transferEncoding?: string;
+  mimeType?: string;
 }
 
 export type FormDataType = Array<FormDataEntryType>;
