@@ -4,22 +4,16 @@ import Busboy from 'busboy';
 import type { IncomingMessage } from "./flow/http-types";
 import type { Stream } from "./flow/stream-types";
 
-export type FilePartType = {
-  type: 'file';
+export type FormDataEntryType = {
   fieldname: string;
-  file: Stream;
-  filename: string;
-  transferEncoding: string;
-  mimeType: string;
+  value?: string;
+  filename?: string;
+  file?: Object;
 }
 
-export type FieldPartType = {
-  type: 'field';
-  fieldname: string;
-  value: string;
-}
+export type FormDataType = Array<FormDataEntryType>;
 
-export type PartType = FilePartType | FieldPartType;
+export type BodyType = string | FormDataType;
 
 export type OptionsType = {
   limits?: {
@@ -29,11 +23,11 @@ export type OptionsType = {
   }
 }
 
-export default function (request: IncomingMessage, opts: OptionsType = {}) : () => Promise<?PartType> {
+export default function (request: IncomingMessage, opts: OptionsType = {}) : () => Promise<?FormDataEntryType> {
   let isAwaiting: boolean = false;
   let ended: boolean = false;
   let resolve: Function, reject: Function;
-  let parts: Array<PartType> = [], errors: Array<Error> = [];
+  let parts: FormDataType = [], errors: Array<Error> = [];
 
   const busboyOptions: Object = Object.assign({}, opts);
   busboyOptions.headers = request.headers;
@@ -63,7 +57,6 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
 
   function onField(fieldname: string, value: string, fieldnameTruncated: boolean, valTruncated: boolean) {
     parts.push({
-      type: 'field',
       fieldname,
       value
     });
@@ -72,7 +65,6 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
 
   function onFile(fieldname: string, file: Stream, filename: string, transferEncoding: string, mimeType: string) {
     parts.push({
-      type: 'file',
       fieldname,
       filename,
       file,
@@ -120,7 +112,7 @@ export default function (request: IncomingMessage, opts: OptionsType = {}) : () 
     }
   }
 
-  return () : Promise<?PartType> => {
+  return () : Promise<?FormDataEntryType> => {
     return new Promise((_resolve, _reject) => {
       isAwaiting = true;
       resolve = _resolve;
