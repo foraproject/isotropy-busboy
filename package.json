@@ -1,7 +1,7 @@
 {
   "author": "Jeswin Kumar <jeswinpk@agilehead.com>",
   "name": "isotropy-busboy",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Wrapper around busboy that works with async/await.",
   "main": "dist/isotropy-busboy.js",
   "scripts": {
@@ -9,10 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeswin/isotropy-busboy.git"
+    "url": "https://github.com/nodejam/isotropy-busboy.git"
   },
   "dependencies": {
-    "busboy": "*"
+    "busboy": "*",
+    "isotropy-interfaces": "*"
   },
   "devDependencies": {
     "formstream": "*",

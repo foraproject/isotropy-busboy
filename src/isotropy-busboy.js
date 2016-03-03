@@ -1,8 +1,8 @@
 /* @flow */
 import Busboy from 'busboy';
 
-import type { IncomingMessage } from "./flow/http-types";
-import type { Stream } from "./flow/stream-types";
+import type { IncomingMessage } from "isotropy-interfaces/node/http";
+import type { Stream } from "isotropy-interfaces/node/stream";
 
 export type FormDataEntryType = {
   fieldname: string;
@@ -21,8 +21,8 @@ export type OptionsType = {
   limits?: {
     files?: number,
     parts?: number,
-    fields?: number
-  }
+  },
+  fields?: number
 }
 
 export default function (request: IncomingMessage, opts: OptionsType = {}) : () => Promise<?FormDataEntryType> {
